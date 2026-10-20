@@ -243,6 +243,14 @@ footer{text-align:center;font-size:12px;color:var(--muted);margin-top:22px}
   *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
 
+/* ---------- Soft skills ---------- */
+.soft-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.soft{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:18px 20px;display:flex;gap:14px;align-items:flex-start}
+.soft b.n{flex:none;width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);font-family:"Playfair Display",serif;font-size:15px}
+.soft h4{font-size:14.5px;font-weight:600;line-height:1.35;margin-bottom:5px;color:var(--ink)}
+.soft p{font-size:13.5px;line-height:1.6;color:var(--ink-2)}
+@media (max-width:680px){.soft-grid{grid-template-columns:minmax(0,1fr)}.soft{padding:16px}}
+
 /* ---------- Pink gradient theme ---------- */
 :root:not([data-theme="dark"]) body{background:linear-gradient(165deg,#f7c3cc 0%,#f9d9df 28%,#fcecef 55%,#fff 85%) fixed}
 :root:not([data-theme="dark"]) #gate{background:linear-gradient(165deg,#f7c3cc 0%,#f9d9df 35%,#fdf0f2 65%,#fff 100%);color:var(--ink)}
@@ -264,7 +272,7 @@ footer{text-align:center;font-size:12px;color:var(--muted);margin-top:22px}
 :root:not([data-theme="dark"]) .snap{background:rgba(255,255,255,.5);color:var(--ink)}
 :root:not([data-theme="dark"]) .snap-stat,:root:not([data-theme="dark"]) .snap-card{background:rgba(255,255,255,.75)}
 :root:not([data-theme="dark"]) .snap-stat b{color:var(--accent)}
-:root:not([data-theme="dark"]) .panel,:root:not([data-theme="dark"]) .kpi{background:rgba(253,243,245,.8)}
+:root:not([data-theme="dark"]) .panel,:root:not([data-theme="dark"]) .kpi,:root:not([data-theme="dark"]) .soft{background:rgba(253,243,245,.8)}
 </style>
 </head>
 <body>
@@ -326,10 +334,6 @@ footer{text-align:center;font-size:12px;color:var(--muted);margin-top:22px}
         </div>
       </div>
 
-      <div class="side-block">
-        <div class="side-h" data-t="strengths"></div>
-        <ul class="strengths" id="strengths"></ul>
-      </div>
     </aside>
 
     <main>
@@ -341,22 +345,10 @@ footer{text-align:center;font-size:12px;color:var(--muted);margin-top:22px}
       <section class="sec rv" id="skills">
         <div class="sec-h"><span class="num">02</span><h2 data-t="skills"></h2></div>
 
-        <div class="kpis" id="kpis"></div>
-
         <div class="dash">
           <div class="panel wide">
             <h3 data-t="p_cats"></h3>
             <div class="cats" id="cats"></div>
-          </div>
-
-          <div class="panel wide">
-            <h3><span data-t="p_matrix"></span><span class="legend" id="matrixLegend"></span></h3>
-            <table class="matrix" id="matrix"></table>
-          </div>
-
-          <div class="panel wide">
-            <h3><span data-t="p_timeline"></span><span class="legend" id="ganttLegend"></span></h3>
-            <div class="gantt" id="gantt"></div>
           </div>
 
           <div class="panel">
@@ -371,8 +363,13 @@ footer{text-align:center;font-size:12px;color:var(--muted);margin-top:22px}
         </div>
       </section>
 
+      <section class="sec rv" id="soft">
+        <div class="sec-h"><span class="num">03</span><h2 data-t="soft_t"></h2></div>
+        <div class="soft-grid" id="softGrid"></div>
+      </section>
+
       <section class="sec rv">
-        <div class="sec-h"><span class="num">03</span><h2 data-t="exp"></h2></div>
+        <div class="sec-h"><span class="num">04</span><h2 data-t="exp"></h2></div>
         <div id="jobs"></div>
       </section>
     </main>
@@ -393,7 +390,16 @@ const T = {
     honor:"Sinh viên Xuất sắc toàn khóa",
     strengths:"Điểm mạnh khác", profile:"Tổng quan bản thân", skills:"Kỹ năng cốt lõi & Năng lực chuyên môn",
     exp:"Kinh nghiệm làm việc", present:"Hiện tại",
-    summary:"Chuyên viên E-commerce & Creator Partnership với kinh nghiệm trong lĩnh vực KOC/KOL booking, chăm sóc khách hàng, bán hàng qua mạng xã hội (social selling), kinh doanh và vận hành thương mại điện tử. Thế mạnh về giao tiếp, thương lượng với creator, điều phối chiến dịch và thực thi công việc hàng ngày. Có kinh nghiệm làm việc trên TikTok Shop, Shopee, Lazada, thương mại xã hội và làm việc với khách hàng quốc tế, sở hữu phương pháp làm việc thực tế, chú trọng chi tiết trong quản lý chiến dịch, khách hàng và phối hợp liên phòng ban.",
+    summary:"Có kinh nghiệm trong kinh doanh, chăm sóc khách hàng, thương mại điện tử và hợp tác KOC/KOL, từng làm việc với khách hàng trong nước và quốc tế. Thế mạnh về giao tiếp, nắm bắt nhu cầu, đàm phán và xây dựng mối quan hệ; có khả năng tổ chức công việc, phối hợp nhiều bên và dẫn dắt nhóm. Phong cách làm việc chủ động, cẩn thận, linh hoạt và chú trọng hiệu quả thực tế. Định hướng phát triển ở vị trí Account Executive, kết hợp tư duy dịch vụ khách hàng với năng lực điều phối để đáp ứng yêu cầu đối tác và mục tiêu kinh doanh.",
+    soft_t:"Kỹ năng mềm",
+    softList:[
+      ["Giao tiếp và lắng nghe","Nắm bắt nhu cầu, truyền đạt thông tin rõ ràng và tiếp nhận phản hồi từ khách hàng, đối tác."],
+      ["Đàm phán và xây dựng quan hệ","Thương lượng điều kiện hợp tác, cân bằng nhu cầu giữa các bên và duy trì quan hệ lâu dài."],
+      ["Làm việc nhóm và điều phối","Phối hợp liên phòng ban, phân chia công việc, hướng dẫn thành viên và theo dõi tiến độ chung."],
+      ["Giải quyết vấn đề và tư duy phản biện","Phân tích thông tin, xác định nguyên nhân và cân nhắc phương án xử lý phù hợp."],
+      ["Tổ chức và quản lý thời gian","Sắp xếp thứ tự ưu tiên, theo dõi deadline và chủ động xử lý nhiều đầu việc."],
+      ["Chủ động và thích nghi","Làm việc độc lập, chú trọng chi tiết, tiếp thu góp ý và linh hoạt điều chỉnh khi yêu cầu thay đổi."]
+    ],
     p_cats:"Lĩnh vực năng lực", p_matrix:"Năng lực × Vị trí đã đảm nhiệm", p_timeline:"Lộ trình sự nghiệp",
     p_focus:"Phân bổ thời gian theo lĩnh vực", p_tools:"Nền tảng & Công cụ",
     k_years:"Năm kinh nghiệm", k_roles:"Doanh nghiệp đã làm việc", k_gpa:"GPA tốt nghiệp", k_plat:"Sàn TMĐT vận hành",
@@ -468,7 +474,16 @@ const T = {
     honor:"Excellent Student, 4 years",
     strengths:"Additional Strengths", profile:"Profile Summary", skills:"Core Skills & Competencies",
     exp:"Work Experience", present:"Present",
-    summary:"E-commerce & Creator Partnership professional with experience in KOC/KOL booking, customer service, social selling, sales, and e-commerce operations. Strong in creator communication, negotiation, campaign coordination, and daily execution. Experienced in working across TikTok Shop, Shopee, Lazada, social commerce, and international B2B/B2C customers, with a practical, detail-oriented approach to managing campaigns and cross-functional tasks.",
+    summary:"Experienced in sales, customer service, e-commerce and KOC/KOL partnerships, having worked with both domestic and international clients. Strong in communication, understanding client needs, negotiation and relationship building; able to organize work, coordinate multiple parties and lead a team. Proactive, careful and flexible, with a focus on practical results. Aiming to grow as an Account Executive, combining a customer-service mindset with coordination skills to meet partner requirements and business goals.",
+    soft_t:"Soft Skills",
+    softList:[
+      ["Communication & listening","Understand needs, convey information clearly and take in feedback from customers and partners."],
+      ["Negotiation & relationship building","Negotiate partnership terms, balance the needs of every party and maintain long-term relationships."],
+      ["Teamwork & coordination","Coordinate across departments, divide tasks, guide team members and track overall progress."],
+      ["Problem solving & critical thinking","Analyze information, identify root causes and weigh suitable solutions."],
+      ["Organization & time management","Set priorities, track deadlines and proactively handle multiple tasks."],
+      ["Proactivity & adaptability","Work independently with attention to detail, take feedback on board and adjust flexibly when requirements change."]
+    ],
     p_cats:"Competency areas", p_matrix:"Competency × Roles held", p_timeline:"Career timeline",
     p_focus:"Time split by domain", p_tools:"Platforms & Tools",
     k_years:"Years of experience", k_roles:"Companies worked with", k_gpa:"Graduation GPA", k_plat:"E-commerce platforms",
@@ -607,17 +622,7 @@ function render(L, silent){
       </div>`;
   }
 
-  $("#strengths").innerHTML = t.strengthsList.map(s=>`<li>${s}</li>`).join("");
-
-  /* KPIs */
-  const totalMonths = mIdx(NOW) - mIdx(COMPANIES[COMPANIES.length-1].s) + 1;
-  const yrs = Math.floor(totalMonths/12);
-  $("#kpis").innerHTML = [
-    [`${yrs}<em>+</em>`, t.k_years],
-    [COMPANIES.length, t.k_roles],
-    [`4.0`, t.k_gpa],
-    [3, t.k_plat]
-  ].map(([v,l])=>`<div class="kpi"><b>${v}</b><span>${l}</span></div>`).join("");
+  $("#softGrid").innerHTML = t.softList.map(([h,d],i)=>`<div class="soft"><b class="n">${String(i+1).padStart(2,"0")}</b><div><h4>${h}</h4><p>${d}</p></div></div>`).join("");
 
   /* Category cards */
   $("#cats").innerHTML = t.cats.map((c,i)=>`
@@ -627,31 +632,6 @@ function render(L, silent){
       <div class="cnt">${c.tags.length} ${t.items}</div>
       <div class="tags">${c.tags.map(x=>`<span>${x}</span>`).join("")}</div>
     </div>`).join("");
-
-  /* Matrix */
-  const head = `<tr><th></th>${COMPANIES.map(c=>`<th>${c.short}</th>`).join("")}<th></th></tr>`;
-  const rows = MATRIX.map((r,i)=>`
-    <tr style="--c:${DOM_COLORS[r.c]}">
-      <td class="lbl">${t.matrix[i]}</td>
-      ${COMPANIES.map((_,j)=>`<td class="cell ${r.on.includes(j)?"on":""}" title="${COMPANIES[j].short}"></td>`).join("")}
-      <td class="bar"><div class="bar-track"><div class="bar-fill" data-w="${r.on.length/COMPANIES.length*100}"></div></div><div class="bar-n">${r.on.length}/${COMPANIES.length} ${t.roles}</div></td>
-    </tr>`).join("");
-  $("#matrix").innerHTML = head + rows;
-  const legendHTML = t.focus.map((f,i)=>`<span><i style="background:${DOM_COLORS[i]}"></i>${f}</span>`).join("");
-  $("#matrixLegend").innerHTML = legendHTML;
-  $("#ganttLegend").innerHTML = legendHTML;
-
-  /* Gantt */
-  const y0 = 2020, y1 = 2027, span = (y1-y0)*12;
-  const pos = ym => (mIdx(ym) - y0*12)/span*100;
-  const axis = `<div class="g-axis" style="grid-template-columns:repeat(${y1-y0},1fr)">${Array.from({length:y1-y0},(_,i)=>`<div>${y0+i}</div>`).join("")}</div>`;
-  const bars = [...COMPANIES].reverse().map(c=>{
-    const l = pos(c.s), w = pos(c.e||NOW) + 100/span - l;
-    const short = w < 14, flip = short && l + w > 70;
-    return `<div class="g-row"><div class="g-bar ${short?"short":""} ${flip?"flip":""}" style="left:${l}%;width:${w}%;--c:${DOM_COLORS[c.dom]}" title="${c.co} · ${fmt(c.s,L)} – ${fmt(c.e,L)}"><span>${c.short} · ${months(c)} ${t.months}</span></div></div>`;
-  }).join("");
-  const edu = `<div class="g-row"><div class="g-bar edu" style="left:${pos([2020,9])}%;width:${pos([2024,9])-pos([2020,9])}%"><span>🎓 ${t.edu_bar}</span></div></div>`;
-  $("#gantt").innerHTML = axis + bars + edu;
 
   /* Donut — months by domain */
   const dm = [0,0,0,0]; COMPANIES.forEach(c=> dm[c.dom] += months(c));
