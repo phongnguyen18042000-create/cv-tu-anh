@@ -661,8 +661,7 @@ function render(L, silent){
   }).join("");
 
   requestAnimationFrame(()=>setTimeout(animateBars,60));
-  if(silent) return;
-  const u = new URL(location); u.searchParams.set("lang", L); history.replaceState(null,"",u);
+  /* Keep the address bar clean so a reload or a copied link always opens the language choice */
 }
 
 function animateBars(){ document.querySelectorAll(".bar-fill").forEach(b=> b.style.width = b.dataset.w + "%"); }
